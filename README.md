@@ -61,3 +61,5 @@ http://localhost:5000
 
 Se utilizó Git y GitHub para el control de versiones del proyecto. Se realizaron múltiples commits representando el progreso del desarrollo, así como el uso de una rama adicional para la implementación de nuevas funcionalidades.
 
+## Base de datos integrada con mongoose
+

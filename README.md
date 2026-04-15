@@ -63,3 +63,9 @@ Se utilizó Git y GitHub para el control de versiones del proyecto. Se realizaro
 
 ## Base de datos integrada con mongoose
 
+## 🐳 Docker
+
+La aplicación fue contenerizada utilizando Docker y Docker Compose. Se crearon contenedores independientes para el frontend, backend y la base de datos MongoDB, permitiendo ejecutar todo el sistema con un solo comando.
+
+
+

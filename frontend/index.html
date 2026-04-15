@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mi Energía</title>
+</head>
+<body>
+
+  <h1>⚡ Mi Energía</h1>
+
+  <button onclick="enviar('alto')">🔋 Alto</button>
+  <button onclick="enviar('medio')">⚡ Medio</button>
+  <button onclick="enviar('bajo')">🪫 Bajo</button>
+
+  <p id="mensaje"></p>
+
+  <script>
+    async function enviar(nivel) {
+      const res = await fetch('http://localhost:3000/energy', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ level: nivel })
+      });
+
+      const data = await res.json();
+      document.getElementById('mensaje').textContent = data.message;
+    }
+  </script>
+
+</body>
+</html>

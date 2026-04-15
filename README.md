@@ -56,3 +56,8 @@ npx serve -l 5000
 Abrir en navegador:
 http://localhost:5000
 
+
+## 🔧 Control de versiones
+
+Se utilizó Git y GitHub para el control de versiones del proyecto. Se realizaron múltiples commits representando el progreso del desarrollo, así como el uso de una rama adicional para la implementación de nuevas funcionalidades.
+

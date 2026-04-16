@@ -67,5 +67,9 @@ Se utilizó Git y GitHub para el control de versiones del proyecto. Se realizaro
 
 La aplicación fue contenerizada utilizando Docker y Docker Compose. Se crearon contenedores independientes para el frontend, backend y la base de datos MongoDB, permitiendo ejecutar todo el sistema con un solo comando.
 
+## ⚙️ Scripts de automatización
+
+Se crearon scripts en Bash para automatizar el despliegue y control de la aplicación. En entornos Windows, estos scripts se complementan con comandos de Docker Compose debido a limitaciones del sistema operativo.
+
 
 

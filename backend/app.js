@@ -90,7 +90,7 @@ s3.putObject({
 
     await newEnergy.save();
   } catch (error) {
-    console.log("DB no disponible (normal en este lab)");
+    console.log("DB no disponible");
   }
 
   // 3. guardar en S3

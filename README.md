@@ -1,75 +1,143 @@
-# ⚡ Mi Energía - Proyecto DevOps
+Mi Energía - Proyecto DevOps
 
-## 📌 Descripción
+- Descripción
 
 "Mi Energía" es una aplicación web que permite a los usuarios registrar su nivel de energía diario (alto, medio o bajo).
 
-La aplicación almacenará la información en una base de datos, mostrará un historial de registros y generará logs en el servidor para evidenciar su funcionamiento.
-
-## 🎯 Objetivo
-
-El objetivo de este proyecto es aplicar prácticas de DevOps mediante el desarrollo, contenerización y despliegue de una aplicación web utilizando herramientas como Docker, AWS y CloudFormation.
-
-## 🧱 Estructura del Proyecto
-
-- backend/: lógica del servidor
-- frontend/: interfaz del usuario
-- cloudformation/: infraestructura como código
+La aplicación procesa esta información mediante un backend, la almacena en una base de datos, genera logs y además los envía a AWS S3 como parte de la integración en la nube.
 
 
-## Backend
+- Objetivo
 
-El backend fue desarrollado utilizando Node.js y Express.
-
-Se implementó un endpoint que permite recibir el nivel de energía del usuario (alto, medio o bajo) mediante solicitudes HTTP.
-
-Además, el sistema genera logs en un archivo local (`logs/app.log`), donde se registra cada interacción del usuario.
+El objetivo de este proyecto es aplicar prácticas de DevOps mediante el desarrollo, contenerización y despliegue de una aplicación web utilizando herramientas como Docker, AWS (EC2, S3) y CloudFormation.
 
 
-## Frontend
+- Arquitectura
 
-El frontend fue desarrollado utilizando HTML y JavaScript.
+La aplicación sigue una arquitectura simple basada en contenedores:
 
-Se implementó una interfaz simple con botones que permiten al usuario seleccionar su nivel de energía. Esta información se envía al backend mediante solicitudes HTTP y la respuesta del servidor se muestra dinámicamente en la página.
+Usuario (Navegador)
+        │
+        ▼
+EC2 (AWS)
+        │
+        ▼
+Docker Compose
+        │
+        ├── Frontend (5173)
+        ├── Backend (3000)
+        └── MongoDB (27017)
+                │
+                ▼
+            AWS S3 (logs)
+
+El usuario accede desde el navegador al frontend
+El frontend envía solicitudes al backend
+El backend procesa los datos, guarda información y genera logs
+Los logs se almacenan localmente y también en S3
 
 
+- Tecnologías utilizadas
 
-## Funcionamiento
+Node.js + Express
+HTML + JavaScript 
+MongoDB + Mongoose
+Docker & Docker Compose
+AWS EC2 → Despliegue
+AWS S3 → Almacenamiento de logs
+Git & GitHub → Control de versiones
+Bash → Automatización
 
-1. El usuario accede a la aplicación desde el navegador.
-2. Selecciona su nivel de energía.
-3. El frontend envía la información al backend.
-4. El backend procesa la solicitud y genera un log.
-5. El servidor responde con un mensaje que se muestra en pantalla.
+
+- Funcionamiento
+
+El usuario accede a la aplicación desde el navegador
+Selecciona su nivel de energía
+El frontend envía la información al backend
+El backend procesa la solicitud
+Se guarda un log local
+Se envía el log a AWS S3
+Se responde al usuario con un mensaje
 
 
-Ejecucion local (como lo ejecute locamente en dos terminales de visual studio code):
+- Ejecución local
 
-### Backend
+- Backend
 cd backend
+npm install
 node app.js
 
-### Frontend
+- Frontend
 cd frontend
 npx serve -l 5000
 
-Abrir en navegador:
+
+- Abrir en navegador
 http://localhost:5000
 
 
-## 🔧 Control de versiones
+- Ejecución con Docker
 
-Se utilizó Git y GitHub para el control de versiones del proyecto. Se realizaron múltiples commits representando el progreso del desarrollo, así como el uso de una rama adicional para la implementación de nuevas funcionalidades.
+Desde la raíz del proyecto:
 
-## Base de datos integrada con mongoose
+docker-compose up -d
 
-## 🐳 Docker
+Esto levanta automáticamente:
 
-La aplicación fue contenerizada utilizando Docker y Docker Compose. Se crearon contenedores independientes para el frontend, backend y la base de datos MongoDB, permitiendo ejecutar todo el sistema con un solo comando.
+Backend
+Frontend
+MongoDB
 
-## ⚙️ Scripts de automatización
 
-Se crearon scripts en Bash para automatizar el despliegue y control de la aplicación. En entornos Windows, estos scripts se complementan con comandos de Docker Compose debido a limitaciones del sistema operativo.
+- Despliegue en EC2
+
+- Pasos realizados
+
+Crear instancia EC2
+Configurar Security Groups (puertos abiertos)
+Conectarse vía EC2 Instance Connect
+
+Clonar repositorio:
+git clone <https://github.com/eriansantoy/mi-energia-devops.git>
+cd mi-energia-devops
+
+Ejecutar despliegue:
+docker-compose up -d
+
+
+- Puertos utilizados
+Servicio	Puerto
+Frontend	5173
+Backend	3000
+MongoDB	27017
+SSH	22
+HTTP	80
+
+- Uso de S3
+
+Se utilizó un bucket de S3 para almacenar logs generados por el backend.
+
+Cada vez que el usuario interactúa con la aplicación:
+
+Se genera un log local
+Se envía automáticamente a S3
+
+Esto permite tener almacenamiento persistente en la nube.
+
+
+- Control de versiones
+
+Se utilizó Git y GitHub para el control de versiones del proyecto. Se realizaron múltiples commits representando el progreso del desarrollo, así como el uso de ramas para nuevas funcionalidades.
+
+
+- Scripts de automatización
+
+Se implementó un script deploy.sh para automatizar el despliegue de la aplicación en EC2, facilitando la ejecución de Docker Compose y reduciendo errores manuales.
+
+
+- Notas finales
+
+Este proyecto demuestra una implementación básica de prácticas DevOps, integrando desarrollo, contenerización y despliegue en la nube en una sola solución funcional.
 
 
 

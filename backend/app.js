@@ -63,10 +63,19 @@ app.post('/energy', async (req, res) => {
   const { level } = req.body;
 
   // 1. log local
-  fs.appendFileSync(
-    'logs/app.log',
-    `[${new Date().toISOString()}] INFO: Nivel de energía: ${level}\n`
-  );
+const log = `[${new Date().toISOString()}] INFO: Nivel de energía: ${level}\n`;
+
+fs.appendFileSync('logs/app.log', log);
+
+// SUBIR A S3
+s3.putObject({
+  Bucket: "NOMBRE_DE_TU_BUCKET",
+  Key: "logs/app.log",
+  Body: log
+}, (err, data) => {
+  if (err) console.log("Error S3:", err);
+  else console.log("Log subido a S3");
+});
 
   // 2. guardar en Mongo
   try {

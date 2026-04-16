@@ -8,12 +8,16 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+AWS.config.update({
+  region: 'us-east-1'
+});
+
 // =====================
 // AWS S3 CONFIG
 // =====================
 const s3 = new AWS.S3();
 
-const BUCKET_NAME = 'mi-energia-ec2';
+const BUCKET_NAME = 'mi-energia-devops-bucket';
 
 // =====================
 // MONGO
@@ -69,7 +73,7 @@ fs.appendFileSync('logs/app.log', log);
 
 // SUBIR A S3
 s3.putObject({
-  Bucket: "NOMBRE_DE_TU_BUCKET",
+  Bucket: "mi-energia-devops-bucket",
   Key: "logs/app.log",
   Body: log
 }, (err, data) => {

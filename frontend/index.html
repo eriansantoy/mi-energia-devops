@@ -15,7 +15,7 @@
 
   <script>
     async function enviar(nivel) {
-      const res = await fetch('http://54.163.19.172:3000/energy', {
+      const res = await fetch('http://54.204.118.188:3000/energy', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ level: nivel })
